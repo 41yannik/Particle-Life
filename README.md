@@ -1,11 +1,27 @@
-# Data-Science-Projekt-Particles
-Particle Life Simulator
+# Particle Life Simulator
 
+**Emergent behaviour from simple rules:** thousands of particles, one attraction/repulsion matrix, no central control. Clusters, cells and chasing swarms form on their own.
 
-**Course:** Data Science & AI Infrastructures (Winter 2025/26)  
-**Project:** Biology-inspired algorithms - Emergent Behavior
+[![CI](https://github.com/41yannik/Particle-Life/actions/workflows/basic_ci.yml/badge.svg)](https://github.com/41yannik/Particle-Life/actions/workflows/basic_ci.yml)
+![Python](https://img.shields.io/badge/python-3.10%E2%80%933.13-3776ab)
+![Numba](https://img.shields.io/badge/Numba-JIT-00a3e0)
+![Coverage](https://img.shields.io/badge/coverage-%E2%89%A570%25%20enforced-success)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-> A high-performance, Python-based implementation of a "Particle Life" simulation. This project explores emergent complexity arising from simple, local interaction rules between agents.
+<p align="center">
+  <img src="docs/assets/particle-life.gif" width="400" alt="Particle Life simulation: coloured particle types forming clusters and swarms">
+</p>
+
+<p align="center"><sub>2,000 particles, 4 types, rendered headless from the simulation engine (<code>scripts/render_gif.py</code>, seed 3)</sub></p>
+
+## Highlights
+
+- **127x faster physics:** spatial hashing plus Numba JIT replaced the O(n²) brute-force engine. 1,000 particles went from 22.7 ms to 0.18 ms per step ([profiling report](docs/profiling_report.md)).
+- **Real-time at scale:** the physics engine runs 1,222 steps per second at 2,000 particles. The OpenGL viewer (Vispy) renders that smoothly; the CPU-based Pygame viewer does not, and the [real-time verification](docs/realtime_verification.md) documents both.
+- **Interactive controls:** change friction, force and interaction radius at runtime.
+- **Engineering discipline:** CI on 3 operating systems × 4 Python versions, ruff, pytest with a 70 % coverage gate.
+
+**Course:** Data Science & AI Infrastructures (winter 2025/26) · **Topic:** biology-inspired algorithms, emergent behaviour
 
 ---
 
@@ -28,7 +44,7 @@ This project aims to deliver a production-grade Python application focusing on a
 ### 1. Core Simulation Engine
 * **Interaction Matrix:** Implementation of an $N \times N$ matrix defining forces between at least **4 distinct particle types**.
 * **Physics Logic:** Time-stepped calculation of velocity, friction, and acceleration based on distance thresholds ($r_{min}$, $r_{max}$).
-* **Boundary Conditions:** Toroidal wrapping or reflective boundaries (implementation pending).
+* **Boundary Conditions:** Toroidal wrapping.
 
 ### 2. Performance Engineering
 * **Optimization Target:** Real-time rendering of **>2,000 particles** at 60 FPS.
@@ -96,8 +112,8 @@ flowchart TD
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/41yannik/Data-Science-Projekt-Particles.git
-cd Data-Science-Projekt-Particles
+git clone https://github.com/41yannik/Particle-Life.git
+cd Particle-Life
 
 # 2. Create virtual environment
 python -m venv .venv
@@ -180,3 +196,14 @@ Development and CI:
   * **Yannik Huber**
   * **Wayan Schmidt**
   * **Azad Aygün**
+
+### My role (Yannik Huber)
+
+- set up the repository, the `ParticleSystem` core on NumPy arrays and the interaction matrix
+- central configuration management (`config.py`), `pyproject.toml` packaging and CI fixes
+- unit tests for simulation and interaction matrix
+- English docstrings, final documentation and this README
+
+## License
+
+[MIT](LICENSE)
