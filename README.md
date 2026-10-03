@@ -2,6 +2,7 @@
 
 **Emergent behaviour from simple rules:** thousands of particles, one attraction/repulsion matrix, no central control. Clusters, cells and chasing swarms form on their own.
 
+[![Live demo](https://img.shields.io/badge/live%20demo-Hugging%20Face-ffcc4d)](https://huggingface.co/spaces/41yannik/particle-life)
 [![CI](https://github.com/41yannik/Particle-Life/actions/workflows/basic_ci.yml/badge.svg)](https://github.com/41yannik/Particle-Life/actions/workflows/basic_ci.yml)
 ![Python](https://img.shields.io/badge/python-3.10%E2%80%933.13-3776ab)
 ![Numba](https://img.shields.io/badge/Numba-JIT-00a3e0)
